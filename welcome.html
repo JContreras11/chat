@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="row">
+          <label for="">Bienvenido</label>
+          <p>Por favor ingrese el nombre de usuario</p>
+           <input type="text" class="form-control" id="name">
+           <input type="submit" id="send" value="Enviar" class="form-control" onclick="setUsername()">
+           <div id="error-container"></div>
+        </div>
+    </div>
+    <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script>
+    var user;
+   var socket = io.connect('http://localhost:3000/',{'forceNew': true});;
+
+
+     function setUsername(){
+     socket.emit('setUsername', {username : document.getElementById('name').value, id: socket.id, num: null});
+     };
+
+
+     socket.on('setUser', function(data){
+     localStorage.user = data.username;
+     localStorage.num = data.num;
+     localStorage.id = data.id;
+
+     location.href = 'http://localhost:8080/chat/';
+
+     });
+
+
+       function sendMessage(){
+         var msg = document.getElementById('message').value;
+         if(msg){
+         socket.emit('msg', {message: msg, user: user});
+         }
+       }
+
+     socket.on('newmsg', function(data){
+     if(user){
+     document.getElementById('message-container').innerHTML +=
+    '<div><b>' + data.user + '</b>: ' + data.message + '</div>'
+     }
+     })
+ </script>
+</body>
+</html>

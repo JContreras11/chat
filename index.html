@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat</title>
+  <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+    <div class="wrap">
+        <div class="row">
+            <div class="chat" id="chat">
+                <div class="head-chat">
+                    <div class="left">
+                        <img src="assets/img/dino.png" alt="" class="user-pic">
+                    </div>
+                    <div class="rigt" >
+                        <h1 class="user-name" id="user_name"></h1><br>
+                        <div class="esc" id="rigt"></div>
+
+                    </div>
+                </div>
+                <div class="chat-body" id="chat-body">
+
+                </div>
+                <div class="chat-footer">
+                    <input type="text" class="form-control" id="int">
+            <input type="submit" value="Enviar" class="form-control" id="button">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+    </div>
+    <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="assets/js/client.js"></script>
+</body>
+</html>
